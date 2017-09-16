@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Grid_Design.Classes;
+using System.Timers;
 
 namespace Grid_Design
 {
@@ -14,8 +16,15 @@ namespace Grid_Design
             int[,] numbers2D = new int[10, 40];
 
             //numbers2D[3, 6] = 7;
-            int xPoint = 4;
-            int yPoint = 4;
+
+            Timer timer = new Timer(500);
+
+
+            SnakeBody head = new SnakeBody(4, 4, 8);
+
+
+            int xPoint = head.PosX;
+            int yPoint = head.PosY;
             // end case value =5;
             //put this ALL in a 2 dimensional array while loop till END condition.
             // print grid
@@ -24,9 +33,10 @@ namespace Grid_Design
             for (int j = 0; j < n; j++)
             {
 
+
                 
 
-                numbers2D[xPoint, yPoint] = 1;
+                numbers2D[xPoint, yPoint] = head.SnakePart;
                 //test case
 
                 for (int i = 0; i < numbers2D.GetLength(0); i++)
@@ -44,13 +54,14 @@ namespace Grid_Design
                         {
                             //put a single value
                             numbers2D[i, k] = 0;
-                            Console.BackgroundColor = ConsoleColor.Black;
+                            Console.BackgroundColor = ConsoleColor.White;
+                            //Console.ForegroundColor = ConsoleColor.White;
                             Console.Write(numbers2D[i, k]);
+                            
                         }
                         else
-                        {
-                            Console.BackgroundColor = ConsoleColor.Yellow;
-                            Console.Write(numbers2D[i, k]);
+                        {                            
+                            Console.Write(head.SnakePart);
                         }
                         // Take a key handler and change values based on the key that is changed
                         //if (Console.ReadKey == )
