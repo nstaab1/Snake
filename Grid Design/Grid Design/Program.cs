@@ -19,7 +19,7 @@ namespace Grid_Design
             List<SnakeBody> newSnake = new List<SnakeBody>();
 
             SnakeBody elm1 = new SnakeBody(4,8,5);
-            SnakeBody elm2 = new SnakeBody(4,12,5); 
+            SnakeBody elm2 = new SnakeBody(4,7,5); 
             newSnake.Add(elm1);
             newSnake.Add(elm2);
 
