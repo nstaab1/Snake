@@ -5,3 +5,10 @@ C:\Users\Nathan Staab\Desktop\Tech-Elevator-Projects\Grid Design\Grid Design\obj
 C:\Users\Nathan Staab\Desktop\Tech-Elevator-Projects\Grid Design\Grid Design\obj\Debug\Grid Design.csproj.CoreCompileInputs.cache
 C:\Users\Nathan Staab\Desktop\Tech-Elevator-Projects\Grid Design\Grid Design\obj\Debug\Grid Design.exe
 C:\Users\Nathan Staab\Desktop\Tech-Elevator-Projects\Grid Design\Grid Design\obj\Debug\Grid Design.pdb
+C:\Users\Nathan Staab\Desktop\Snake\Grid Design\Grid Design\bin\Debug\Grid Design.exe.config
+C:\Users\Nathan Staab\Desktop\Snake\Grid Design\Grid Design\bin\Debug\Grid Design.exe
+C:\Users\Nathan Staab\Desktop\Snake\Grid Design\Grid Design\bin\Debug\Grid Design.pdb
+C:\Users\Nathan Staab\Desktop\Snake\Grid Design\Grid Design\obj\Debug\Grid Design.csprojResolveAssemblyReference.cache
+C:\Users\Nathan Staab\Desktop\Snake\Grid Design\Grid Design\obj\Debug\Grid Design.csproj.CoreCompileInputs.cache
+C:\Users\Nathan Staab\Desktop\Snake\Grid Design\Grid Design\obj\Debug\Grid Design.exe
+C:\Users\Nathan Staab\Desktop\Snake\Grid Design\Grid Design\obj\Debug\Grid Design.pdb

@@ -8,19 +8,21 @@ namespace Grid_Design.Classes
 {
     public class SnakeBody
     {
-        private int posX;
-        private int posY;
+        private int posIn;
+        private int posDown;
         private int snakePart;
 
-        public int PosX
+        public int PosIn
         {
-            get { return this.posX; }
+            get { return this.posIn; }
+            set { this.posIn = value; }
         }
 
        
-        public int PosY
+        public int PosDown
         {
-            get { return this.posY; }
+            get { return this.posDown; }
+            set { this.posDown = value; }
         }
 
         public int SnakePart
@@ -32,10 +34,10 @@ namespace Grid_Design.Classes
             }
         }
 
-        public SnakeBody (int posX, int posY, int snakePart)
+        public SnakeBody (int posIn, int posDown, int snakePart)
         {
-            this.posX = posX;
-            this.posY = posY;
+            this.posIn = posIn;
+            this.posDown = posDown;
             this.snakePart = snakePart;
         }
 
