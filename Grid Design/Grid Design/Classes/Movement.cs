@@ -8,30 +8,44 @@ namespace Grid_Design.Classes
 {
     class Movement
     {
-        //static void Main(string[] args)
-        //{
-        //    int positionX = 1;
-        //    int positionY = 1;
-
-        //    string O = "O";
-        //    //Timer timer = new Timer(2000);
-        //    Console.SetCursorPosition(positionX, positionY);
-        //    Console.Write(O);
-        //    while (positionX < 20)
-        //    {
-
-        //        Thread.Sleep(100);
-        //        Console.SetCursorPosition(positionX, positionY);
-        //        Console.Write(O);
-        //        positionX += 1;
+        private string direction;
 
 
-        //    }
+        public void MoveRight()
+        {
+            
+        }
 
-
-
-
-        //}
+        public Movement(string direction)
+        {
+            this.direction = direction;
+        }
 
     }
+
+
+
+
+
+    //Do NOT change under any circumstance
+
+    //for (int i = 1; i<newSnake.Count; i++)
+    //                    {
+    //                        Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
+    //                        Console.Write(0);
+    //                        tempHorizontal = newSnake[i].PosHorizontal;
+    //                        tempVertical = newSnake[i].PosVertical;
+    //                        newSnake[i].PosHorizontal = moveHorizontalForNextSegment;
+    //                        newSnake[i].PosVertical = moveVerticalForNextSegment;
+    //                        Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
+    //                        Console.Write(elm1.SnakePart);
+    //                        moveVerticalForNextSegment = tempVertical;
+    //                        moveVerticalForNextSegment = tempHorizontal;
+
+
+
+
+
+
+    //                    }
 }
