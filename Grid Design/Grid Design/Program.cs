@@ -13,17 +13,26 @@ namespace Grid_Design
         static void Main(string[] args)
         {
 
-            int[,] numbers2D = new int[10, 10];
+            int[,] numbers2D = new int[28, 100];
 
             //points used to initialize snake
             int horizontalPoint = 0;
             int verticalPoint = 0;
             List<SnakeBody> newSnake = new List<SnakeBody>();
 
-            SnakeBody elm1 = new SnakeBody(3, 5, 5);
-            SnakeBody elm2 = new SnakeBody(3, 4, 7);
+            SnakeBody elm1 = new SnakeBody(3, 6, 5);
+            SnakeBody elm2 = new SnakeBody(3, 5, 7);
+            SnakeBody elm3 = new SnakeBody(3, 4, 7);
+            SnakeBody elm4 = new SnakeBody(3, 3, 7);
+            SnakeBody elm5 = new SnakeBody(3, 2, 7);
+            SnakeBody elm6 = new SnakeBody(3, 1, 7);
             newSnake.Add(elm1);
             newSnake.Add(elm2);
+            newSnake.Add(elm3);
+            newSnake.Add(elm4);
+            newSnake.Add(elm5);
+            newSnake.Add(elm6);
+
 
             //for as long as the start snake, make those values snakepart
             for (int i = 0; i < newSnake.Count; i++)
@@ -51,12 +60,13 @@ namespace Grid_Design
                         //put a single value
                         numbers2D[i, k] = 0;
                         
-                        //Console.ForegroundColor = ConsoleColor.White;
+                        //Console.ForegroundColor = ConsoleColor.Black;
                         Console.Write(numbers2D[i, k]);
 
                     }
                     else
                     {
+                        //Console.ForegroundColor = ConsoleColor.Black;
                         Console.Write(elm1.SnakePart);
                         Console.BackgroundColor = ConsoleColor.Black;
                     }
@@ -68,8 +78,20 @@ namespace Grid_Design
                 //next row
                 Console.WriteLine();
             }
+            
 
-            int gameLength = 0;
+                //generate random coordinates
+                //Random horizontal = new Random();
+                //Random vertical = new Random();
+                //int randomHorizontal = horizontal.Next(1, 100);
+                //int randomVertical = vertical.Next(1, 28);
+                //Console.SetCursorPosition(randomHorizontal, randomVertical);
+                //Console.BackgroundColor = ConsoleColor.Yellow;
+                //Console.ForegroundColor = ConsoleColor.Yellow;
+                //Console.Write("1");
+                //Console.ForegroundColor = ConsoleColor.Black;
+
+                int gameLength = 0;
             //int firstMovement = 0;
             //ConsoleKeyInfo info = Console.ReadKey(true);
             do//while (gameLength < 50)
@@ -101,12 +123,12 @@ namespace Grid_Design
                 while (Console.KeyAvailable == false)
                 {
 
-
+                    
                     if ((info.Key == ConsoleKey.A || info.Key == ConsoleKey.LeftArrow))
                     {
 
 
-                        Thread.Sleep(10);
+                        Thread.Sleep(150);
                         //variable used to move snake right by 1 space
                         int moveLeft = 0;
                         moveLeft += newSnake[0].PosHorizontal - 1;
@@ -122,6 +144,7 @@ namespace Grid_Design
                         for (int i = 1; i < newSnake.Count; i++)
                         {
                             Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
+                            Console.BackgroundColor = ConsoleColor.Black;
                             Console.Write(0);
                             tempHorizontal = newSnake[i].PosHorizontal;
                             tempVertical = newSnake[i].PosVertical;
@@ -130,7 +153,7 @@ namespace Grid_Design
                             Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
                             Console.Write(elm1.SnakePart);
                             moveVerticalForNextSegment = tempVertical;
-                            moveVerticalForNextSegment = tempHorizontal;
+                            moveHorizontalForNextSegment = tempHorizontal;
 
 
 
@@ -144,7 +167,7 @@ namespace Grid_Design
                     }
                     if ((info.Key == ConsoleKey.W || info.Key == ConsoleKey.UpArrow))
                     {
-                        Thread.Sleep(10);
+                        Thread.Sleep(150);
                         //variable used to move snake right by 1 space
                         int moveUp = 0;
                         moveUp += newSnake[0].PosVertical - 1;
@@ -160,6 +183,7 @@ namespace Grid_Design
                         for (int i = 1; i < newSnake.Count; i++)
                         {
                             Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
+                            Console.BackgroundColor = ConsoleColor.Black;
                             Console.Write(0);
                             tempHorizontal = newSnake[i].PosHorizontal;
                             tempVertical = newSnake[i].PosVertical;
@@ -168,7 +192,7 @@ namespace Grid_Design
                             Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
                             Console.Write(elm1.SnakePart);
                             moveVerticalForNextSegment = tempVertical;
-                            moveVerticalForNextSegment = tempHorizontal;
+                            moveHorizontalForNextSegment = tempHorizontal;
 
 
 
@@ -181,7 +205,7 @@ namespace Grid_Design
                     }
                     if ((info.Key == ConsoleKey.D || info.Key == ConsoleKey.RightArrow))
                     {
-                        Thread.Sleep(10);
+                        Thread.Sleep(150);
                         //variable used to move snake right by 1 space
                         int moveRight = 0;
                         moveRight += newSnake[0].PosHorizontal + 1;
@@ -197,6 +221,7 @@ namespace Grid_Design
                         for ( int i = 1; i <newSnake.Count; i++)
                         {
                             Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
+                            Console.BackgroundColor = ConsoleColor.Black;
                             Console.Write(0);
                             tempHorizontal = newSnake[i].PosHorizontal;
                             tempVertical = newSnake[i].PosVertical;
@@ -205,7 +230,7 @@ namespace Grid_Design
                             Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
                             Console.Write(elm1.SnakePart);
                             moveVerticalForNextSegment = tempVertical;
-                            moveVerticalForNextSegment = tempHorizontal;
+                            moveHorizontalForNextSegment = tempHorizontal;
 
 
 
@@ -218,7 +243,7 @@ namespace Grid_Design
                     }
                     if ((info.Key == ConsoleKey.S || info.Key == ConsoleKey.DownArrow))
                     {
-                        Thread.Sleep(10);
+                        Thread.Sleep(150);
                         //variable used to move snake right by 1 space
                         int moveDown = 0;
                         moveDown += newSnake[0].PosVertical + 1;
@@ -234,6 +259,7 @@ namespace Grid_Design
                         for (int i = 1; i < newSnake.Count; i++)
                         {
                             Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
+                            Console.BackgroundColor = ConsoleColor.Black;
                             Console.Write(0);
                             tempHorizontal = newSnake[i].PosHorizontal;
                             tempVertical = newSnake[i].PosVertical;
@@ -242,7 +268,7 @@ namespace Grid_Design
                             Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
                             Console.Write(elm1.SnakePart);
                             moveVerticalForNextSegment = tempVertical;
-                            moveVerticalForNextSegment = tempHorizontal;
+                            moveHorizontalForNextSegment = tempHorizontal;
 
 
 
@@ -253,6 +279,8 @@ namespace Grid_Design
 
                     }
                 }
+
+
 
 
 
