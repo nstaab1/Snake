@@ -15,17 +15,19 @@ namespace Grid_Design
 
             int[,] numbers2D = new int[28, 100];
 
+            FoodGenerator addFood = new FoodGenerator();
+
             //points used to initialize snake
             int horizontalPoint = 0;
             int verticalPoint = 0;
             List<SnakeBody> newSnake = new List<SnakeBody>();
 
             SnakeBody elm1 = new SnakeBody(3, 6, 5);
-            SnakeBody elm2 = new SnakeBody(3, 5, 7);
-            SnakeBody elm3 = new SnakeBody(3, 4, 7);
-            SnakeBody elm4 = new SnakeBody(3, 3, 7);
-            SnakeBody elm5 = new SnakeBody(3, 2, 7);
-            SnakeBody elm6 = new SnakeBody(3, 1, 7);
+            SnakeBody elm2 = new SnakeBody(3, 5, 5);
+            SnakeBody elm3 = new SnakeBody(3, 4, 5);
+            SnakeBody elm4 = new SnakeBody(3, 3, 5);
+            SnakeBody elm5 = new SnakeBody(3, 2, 5);
+            SnakeBody elm6 = new SnakeBody(3, 1, 5);
             newSnake.Add(elm1);
             newSnake.Add(elm2);
             newSnake.Add(elm3);
@@ -94,6 +96,10 @@ namespace Grid_Design
                 int gameLength = 0;
             //int firstMovement = 0;
             //ConsoleKeyInfo info = Console.ReadKey(true);
+
+            //add food at a random place
+            addFood.PlaceFood(addFood.FoodPosHorizontal, addFood.FoodPosVertical);
+
             do//while (gameLength < 50)
             {
                 ConsoleKeyInfo info = Console.ReadKey(true);
@@ -120,8 +126,11 @@ namespace Grid_Design
                 int moveVerticalForNextSegment = 0;
                 int moveHorizontalForNextSegment = 0;
 
+                
+
                 while (Console.KeyAvailable == false)
                 {
+                    
 
                     
                     if ((info.Key == ConsoleKey.A || info.Key == ConsoleKey.LeftArrow))
@@ -278,6 +287,7 @@ namespace Grid_Design
                         }
 
                     }
+                    
                 }
 
 

@@ -41,5 +41,34 @@ namespace Grid_Design.Classes
             this.snakePart = snakePart;
         }
 
+
+        //when snake head hits "1" add snakepart to body
+
+        //public void AddSnakePart(int up, int accross)
+        //{
+        //    if(boardElement == foodElement)
+        //    {
+        //        /* add on to snake;*/
+        //    }
+        //}
+
+
+        //End game when snake head hits boundary or itself
+
+        //public void QuitGame()
+        //{
+        //    if (snakebody[0] > 28 || snakebody[0] < 0)
+        //    {
+        //        /*end program;*/
+        //    }
+        //    if(snakebody[1] > 100 || snakebody[1] < 0)
+        //    {
+        //        /*end program;*/
+        //    }
+        //    if(snakeElement == snakePart)
+        //    {
+        //        /*end program;*/
+        //    }
+        //}
     }
 }

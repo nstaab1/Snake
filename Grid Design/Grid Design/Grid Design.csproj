@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\FoodGenerator.cs" />
     <Compile Include="Classes\Movement.cs" />
     <Compile Include="Classes\SnakeBody.cs" />
     <Compile Include="Classes\SnakeLoop.cs" />
