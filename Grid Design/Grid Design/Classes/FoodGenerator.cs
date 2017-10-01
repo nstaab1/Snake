@@ -11,20 +11,21 @@ namespace Grid_Design.Classes
 
         private int foodPosVertical;
         private int foodPosHorizontal;
+        
         Random food = new Random();
        
 
         public int FoodPosVertical
         {
             get {
-                this.foodPosVertical = food.Next(0, 29);
+                this.foodPosVertical = food.Next(1, 28);
                 return foodPosVertical; }
         }
 
         public int FoodPosHorizontal
         {
             get {
-                this.foodPosHorizontal = food.Next(0, 101);
+                this.foodPosHorizontal = food.Next(1, 100);
                 return foodPosHorizontal; }
         }
 

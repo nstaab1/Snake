@@ -51,6 +51,15 @@ namespace Grid_Design.Classes
         //        /* add on to snake;*/
         //    }
         //}
+        //public void AddSnakePart(List<SnakeBody> name, int up, int across)
+        //{
+        //    name.Add(new SnakeBody(up, across, 5));
+        //    Console.Write(0);
+        //    name[0].PosHorizontal = moveLeft;
+        //    Console.SetCursorPosition(name[0].PosHorizontal, name[0].PosVertical);
+        //    Console.Write(name[0].SnakePart);
+            
+        //}
 
 
         //End game when snake head hits boundary or itself

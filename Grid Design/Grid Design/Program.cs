@@ -12,10 +12,20 @@ namespace Grid_Design
     {
         static void Main(string[] args)
         {
+            int upMaxCoordinate = 28;
+            int acrossMaxCoordinate = 100;
+            int[,] numbers2D = new int[upMaxCoordinate, acrossMaxCoordinate];
 
-            int[,] numbers2D = new int[28, 100];
+            int score = 0;
+
+            
+
+            bool gameOver = false;
 
             FoodGenerator addFood = new FoodGenerator();
+            // cursor position for food generator
+            int upFood;
+            int acrossFood;
 
             //points used to initialize snake
             int horizontalPoint = 0;
@@ -61,7 +71,7 @@ namespace Grid_Design
                     {
                         //put a single value
                         numbers2D[i, k] = 0;
-                        
+
                         //Console.ForegroundColor = ConsoleColor.Black;
                         Console.Write(numbers2D[i, k]);
 
@@ -80,222 +90,294 @@ namespace Grid_Design
                 //next row
                 Console.WriteLine();
             }
-            
 
-                //generate random coordinates
-                //Random horizontal = new Random();
-                //Random vertical = new Random();
-                //int randomHorizontal = horizontal.Next(1, 100);
-                //int randomVertical = vertical.Next(1, 28);
-                //Console.SetCursorPosition(randomHorizontal, randomVertical);
-                //Console.BackgroundColor = ConsoleColor.Yellow;
-                //Console.ForegroundColor = ConsoleColor.Yellow;
-                //Console.Write("1");
-                //Console.ForegroundColor = ConsoleColor.Black;
 
-                int gameLength = 0;
+            //generate random coordinates
+            //Random horizontal = new Random();
+            //Random vertical = new Random();
+            //int randomHorizontal = horizontal.Next(1, 100);
+            //int randomVertical = vertical.Next(1, 28);
+            //Console.SetCursorPosition(randomHorizontal, randomVertical);
+            //Console.BackgroundColor = ConsoleColor.Yellow;
+            //Console.ForegroundColor = ConsoleColor.Yellow;
+            //Console.Write("1");
+            //Console.ForegroundColor = ConsoleColor.Black;
+
+            bool gameLength = true;
             //int firstMovement = 0;
             //ConsoleKeyInfo info = Console.ReadKey(true);
 
             //add food at a random place
-            addFood.PlaceFood(addFood.FoodPosHorizontal, addFood.FoodPosVertical);
+            acrossFood = addFood.FoodPosHorizontal;
+            upFood = addFood.FoodPosVertical;
+            addFood.PlaceFood(acrossFood, upFood);
 
-            do//while (gameLength < 50)
+            int sleepVariable = 37;
+            double variableHolder = sleepVariable * 1.5;
+            int verticalSleep;
+            verticalSleep = (int)variableHolder;
+
+            do
             {
-                ConsoleKeyInfo info = Console.ReadKey(true);
-
-                //while (firstMovement < 2)
-                //{
-                //    Thread.Sleep(500);
-                //    //variable used to move snake right by 1 space
-                //    int moveRight = 0;
-                //    moveRight += newSnake[0].PosHorizontal + 1;
-                //    Console.SetCursorPosition(elm1.PosHorizontal, elm1.PosVertical);
-                //    Console.Write(0);
-                //    elm1.PosHorizontal = moveRight;
-                //    Console.SetCursorPosition(elm1.PosHorizontal, elm1.PosVertical);
-                //    Console.Write(elm1.SnakePart);
-                //    if ((info.Key == ConsoleKey.A || info.Key == ConsoleKey.LeftArrow) || (info.Key == ConsoleKey.D || info.Key == ConsoleKey.RightArrow) || (info.Key == ConsoleKey.W || info.Key == ConsoleKey.UpArrow) || (info.Key == ConsoleKey.S || info.Key == ConsoleKey.DownArrow))
-                //    {
-                //        firstMovement++;
-                //    }
-                //}
-
                 int tempVertical = 0;
                 int tempHorizontal = 0;
                 int moveVerticalForNextSegment = 0;
                 int moveHorizontalForNextSegment = 0;
-
                 
-
                 while (Console.KeyAvailable == false)
                 {
-                    
+                                                          
+                    if(newSnake[0].PosHorizontal <= 0 || newSnake[0].PosHorizontal >= acrossMaxCoordinate || newSnake[0].PosVertical <= 0 || newSnake[0].PosVertical >= upMaxCoordinate)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Game Over");
+                        Console.WriteLine($"score: {score}");
+                        gameOver = true;
+                        break;
 
-                    
+                    }
+
                     if ((info.Key == ConsoleKey.A || info.Key == ConsoleKey.LeftArrow))
                     {
+                       
 
-
-                        Thread.Sleep(150);
+                        Thread.Sleep(sleepVariable);
                         //variable used to move snake right by 1 space
                         int moveLeft = 0;
                         moveLeft += newSnake[0].PosHorizontal - 1;
-                        Console.SetCursorPosition(elm1.PosHorizontal, elm1.PosVertical);
-                        //Move variable store the previous position of the head of the snake
-                        moveVerticalForNextSegment = elm1.PosVertical;
-                        moveHorizontalForNextSegment = elm1.PosHorizontal;
-                        Console.Write(0);
-                        elm1.PosHorizontal = moveLeft;
-                        Console.SetCursorPosition(elm1.PosHorizontal, elm1.PosVertical);
-                        Console.Write(elm1.SnakePart);
-
-                        for (int i = 1; i < newSnake.Count; i++)
+                        
+                        if (newSnake[0].PosHorizontal == acrossFood && newSnake[0].PosVertical == upFood)
                         {
-                            Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
-                            Console.BackgroundColor = ConsoleColor.Black;
+                            score += newSnake.Count;
+                            newSnake.Add(new SnakeBody(upFood, acrossFood, 5));
+                            //Console.Write(0);
+                            newSnake[0].PosHorizontal = moveLeft;
+                            Console.SetCursorPosition(newSnake[0].PosHorizontal, newSnake[0].PosVertical);
+                            Console.Write(newSnake[0].SnakePart);
+                            acrossFood = addFood.FoodPosHorizontal;
+                            upFood = addFood.FoodPosVertical;
+                            addFood.PlaceFood(acrossFood, upFood);
+                        }
+                        else
+                        {
+                            Console.SetCursorPosition(newSnake[0].PosHorizontal, newSnake[0].PosVertical);
+                            //Move variable store the previous position of the head of the snake
+                            moveVerticalForNextSegment = newSnake[0].PosVertical;
+                            moveHorizontalForNextSegment = newSnake[0].PosHorizontal;
                             Console.Write(0);
-                            tempHorizontal = newSnake[i].PosHorizontal;
-                            tempVertical = newSnake[i].PosVertical;
-                            newSnake[i].PosHorizontal = moveHorizontalForNextSegment;
-                            newSnake[i].PosVertical = moveVerticalForNextSegment;
-                            Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
-                            Console.Write(elm1.SnakePart);
-                            moveVerticalForNextSegment = tempVertical;
-                            moveHorizontalForNextSegment = tempHorizontal;
-
-
-
-
-
+                            newSnake[0].PosHorizontal = moveLeft;
+                            Console.SetCursorPosition(newSnake[0].PosHorizontal, newSnake[0].PosVertical);
+                            Console.Write(newSnake[0].SnakePart);
+                            
+                                                        
+                            for (int i = 1; i < newSnake.Count; i++)
+                            {
+                                Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
+                                Console.BackgroundColor = ConsoleColor.Red;
+                                //Console.Write(0);
+                                tempHorizontal = newSnake[i].PosHorizontal;
+                                tempVertical = newSnake[i].PosVertical;
+                                newSnake[i].PosHorizontal = moveHorizontalForNextSegment;
+                                newSnake[i].PosVertical = moveVerticalForNextSegment;
+                                Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
+                                Console.Write(newSnake[i].SnakePart);
+                                moveVerticalForNextSegment = tempVertical;
+                                moveHorizontalForNextSegment = tempHorizontal;
+                            }
+                            score++;
 
                         }
-
-
+                        Console.SetCursorPosition(tempHorizontal, tempVertical);
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write(0);
 
                     }
                     if ((info.Key == ConsoleKey.W || info.Key == ConsoleKey.UpArrow))
                     {
-                        Thread.Sleep(150);
+                       
+
+                        Thread.Sleep(verticalSleep);
                         //variable used to move snake right by 1 space
                         int moveUp = 0;
                         moveUp += newSnake[0].PosVertical - 1;
-                        Console.SetCursorPosition(elm1.PosHorizontal, elm1.PosVertical);
-                        //Move variable store the previous position of the head of the snake
-                        moveVerticalForNextSegment = elm1.PosVertical;
-                        moveHorizontalForNextSegment = elm1.PosHorizontal;
-                        Console.Write(0);
-                        elm1.PosVertical = moveUp;
-                        Console.SetCursorPosition(elm1.PosHorizontal, elm1.PosVertical);
-                        Console.Write(elm1.SnakePart);
 
-                        for (int i = 1; i < newSnake.Count; i++)
-                        {
-                            Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
-                            Console.BackgroundColor = ConsoleColor.Black;
+                        if (newSnake[0].PosHorizontal == acrossFood && newSnake[0].PosVertical == upFood)
+                        {                           
+                            score += newSnake.Count;
+                            newSnake.Add(new SnakeBody(upFood, acrossFood, 5));
                             Console.Write(0);
-                            tempHorizontal = newSnake[i].PosHorizontal;
-                            tempVertical = newSnake[i].PosVertical;
-                            newSnake[i].PosHorizontal = moveHorizontalForNextSegment;
-                            newSnake[i].PosVertical = moveVerticalForNextSegment;
-                            Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
-                            Console.Write(elm1.SnakePart);
-                            moveVerticalForNextSegment = tempVertical;
-                            moveHorizontalForNextSegment = tempHorizontal;
+                            newSnake[0].PosVertical = moveUp;
+                            Console.SetCursorPosition(newSnake[0].PosHorizontal, newSnake[0].PosVertical);
+                            Console.Write(newSnake[0].SnakePart);
+                            acrossFood = addFood.FoodPosHorizontal;
+                            upFood = addFood.FoodPosVertical;
+                            addFood.PlaceFood(acrossFood, upFood);
+                        }                       
+                        else
+                        {
+                            Console.SetCursorPosition(newSnake[0].PosHorizontal, newSnake[0].PosVertical);
+                            //Move variable store the previous position of the head of the snake
+                            moveVerticalForNextSegment = newSnake[0].PosVertical;
+                            moveHorizontalForNextSegment = newSnake[0].PosHorizontal;
+                            Console.Write(0);
+                            newSnake[0].PosVertical = moveUp;
+                            Console.SetCursorPosition(newSnake[0].PosHorizontal, newSnake[0].PosVertical);
+                            Console.Write(newSnake[0].SnakePart);                                                 
 
-
-
-
-
-
+                            for (int i = 1; i < newSnake.Count; i++)
+                            {
+                                Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
+                                Console.BackgroundColor = ConsoleColor.Red;
+                                Console.Write(0);
+                                tempHorizontal = newSnake[i].PosHorizontal;
+                                tempVertical = newSnake[i].PosVertical;
+                                newSnake[i].PosHorizontal = moveHorizontalForNextSegment;
+                                newSnake[i].PosVertical = moveVerticalForNextSegment;
+                                Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
+                                Console.Write(newSnake[i].SnakePart);
+                                moveVerticalForNextSegment = tempVertical;
+                                moveHorizontalForNextSegment = tempHorizontal;
+                            }
+                            score++;
                         }
+                        Console.SetCursorPosition(tempHorizontal, tempVertical);
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write(0);
 
 
                     }
                     if ((info.Key == ConsoleKey.D || info.Key == ConsoleKey.RightArrow))
                     {
-                        Thread.Sleep(150);
+                        
+
+                        Thread.Sleep(sleepVariable);
                         //variable used to move snake right by 1 space
                         int moveRight = 0;
                         moveRight += newSnake[0].PosHorizontal + 1;
-                        Console.SetCursorPosition(elm1.PosHorizontal, elm1.PosVertical);
-                        //Move variable store the previous position of the head of the snake
-                        moveVerticalForNextSegment = elm1.PosVertical;
-                        moveHorizontalForNextSegment = elm1.PosHorizontal;
-                        Console.Write(0);
-                        elm1.PosHorizontal = moveRight;
-                        Console.SetCursorPosition(elm1.PosHorizontal, elm1.PosVertical);
-                        Console.Write(elm1.SnakePart);
 
-                        for ( int i = 1; i <newSnake.Count; i++)
+                        if (newSnake[0].PosHorizontal == acrossFood && newSnake[0].PosVertical == upFood)
                         {
-                            Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
-                            Console.BackgroundColor = ConsoleColor.Black;
+                            score += newSnake.Count;
+                            newSnake.Add(new SnakeBody(upFood, acrossFood, 5));
                             Console.Write(0);
-                            tempHorizontal = newSnake[i].PosHorizontal;
-                            tempVertical = newSnake[i].PosVertical;
-                            newSnake[i].PosHorizontal = moveHorizontalForNextSegment;
-                            newSnake[i].PosVertical = moveVerticalForNextSegment;
-                            Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
-                            Console.Write(elm1.SnakePart);
-                            moveVerticalForNextSegment = tempVertical;
-                            moveHorizontalForNextSegment = tempHorizontal;
-
-
-
-
-
-
+                            newSnake[0].PosHorizontal = moveRight;
+                            Console.SetCursorPosition(newSnake[0].PosHorizontal, newSnake[0].PosVertical);
+                            Console.Write(newSnake[0].SnakePart);
+                            acrossFood = addFood.FoodPosHorizontal;
+                            upFood = addFood.FoodPosVertical;
+                            addFood.PlaceFood(acrossFood, upFood);
+                        }                        
+                        else
+                        {
+                            Console.SetCursorPosition(newSnake[0].PosHorizontal, newSnake[0].PosVertical);
+                            //Move variable store the previous position of the head of the snake
+                            moveVerticalForNextSegment = newSnake[0].PosVertical;
+                            moveHorizontalForNextSegment = newSnake[0].PosHorizontal;
+                            Console.Write(0);
+                            newSnake[0].PosHorizontal = moveRight;
+                            Console.SetCursorPosition(newSnake[0].PosHorizontal, newSnake[0].PosVertical);
+                            Console.Write(newSnake[0].SnakePart);
+                                                        
+                            for (int i = 1; i < newSnake.Count; i++)
+                            {
+                                Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
+                                Console.BackgroundColor = ConsoleColor.Red;
+                                Console.Write(0);
+                                tempHorizontal = newSnake[i].PosHorizontal;
+                                tempVertical = newSnake[i].PosVertical;
+                                newSnake[i].PosHorizontal = moveHorizontalForNextSegment;
+                                newSnake[i].PosVertical = moveVerticalForNextSegment;
+                                Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
+                                Console.Write(newSnake[i].SnakePart);
+                                moveVerticalForNextSegment = tempVertical;
+                                moveHorizontalForNextSegment = tempHorizontal;
+                            }
+                            score++;
                         }
+                        Console.SetCursorPosition(tempHorizontal, tempVertical);
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write(0);
 
 
                     }
                     if ((info.Key == ConsoleKey.S || info.Key == ConsoleKey.DownArrow))
                     {
-                        Thread.Sleep(150);
+                        
+
+                        Thread.Sleep(verticalSleep);
                         //variable used to move snake right by 1 space
                         int moveDown = 0;
                         moveDown += newSnake[0].PosVertical + 1;
-                        Console.SetCursorPosition(elm1.PosHorizontal, elm1.PosVertical);
-                        //Move variable store the previous position of the head of the snake
-                        moveVerticalForNextSegment = elm1.PosVertical;
-                        moveHorizontalForNextSegment = elm1.PosHorizontal;
-                        Console.Write(0);
-                        elm1.PosVertical = moveDown;
-                        Console.SetCursorPosition(elm1.PosHorizontal, elm1.PosVertical);
-                        Console.Write(elm1.SnakePart);
 
-                        for (int i = 1; i < newSnake.Count; i++)
+                        if (newSnake[0].PosHorizontal == acrossFood && newSnake[0].PosVertical == upFood)
                         {
-                            Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
-                            Console.BackgroundColor = ConsoleColor.Black;
+                            score += newSnake.Count;
+                            newSnake.Add(new SnakeBody(upFood, acrossFood, 5));
                             Console.Write(0);
-                            tempHorizontal = newSnake[i].PosHorizontal;
-                            tempVertical = newSnake[i].PosVertical;
-                            newSnake[i].PosHorizontal = moveHorizontalForNextSegment;
-                            newSnake[i].PosVertical = moveVerticalForNextSegment;
-                            Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
-                            Console.Write(elm1.SnakePart);
-                            moveVerticalForNextSegment = tempVertical;
-                            moveHorizontalForNextSegment = tempHorizontal;
-
-
-
-
-
-
+                            newSnake[0].PosVertical = moveDown;
+                            Console.SetCursorPosition(newSnake[0].PosHorizontal, newSnake[0].PosVertical);
+                            Console.Write(newSnake[0].SnakePart);
+                            acrossFood = addFood.FoodPosHorizontal;
+                            upFood = addFood.FoodPosVertical;
+                            addFood.PlaceFood(acrossFood, upFood);
+                        }                    
+                        else
+                        {
+                            Console.SetCursorPosition(newSnake[0].PosHorizontal, newSnake[0].PosVertical);
+                            //Move variable store the previous position of the head of the snake
+                            moveVerticalForNextSegment = newSnake[0].PosVertical;
+                            moveHorizontalForNextSegment = newSnake[0].PosHorizontal;
+                            Console.Write(0);
+                            newSnake[0].PosVertical = moveDown;
+                            Console.SetCursorPosition(newSnake[0].PosHorizontal, newSnake[0].PosVertical);
+                            Console.Write(newSnake[0].SnakePart);
+                                                        
+                            for (int i = 1; i < newSnake.Count; i++)
+                            {
+                                Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
+                                Console.BackgroundColor = ConsoleColor.Red;
+                                Console.Write(0);
+                                tempHorizontal = newSnake[i].PosHorizontal;
+                                tempVertical = newSnake[i].PosVertical;
+                                newSnake[i].PosHorizontal = moveHorizontalForNextSegment;
+                                newSnake[i].PosVertical = moveVerticalForNextSegment;
+                                Console.SetCursorPosition(newSnake[i].PosHorizontal, newSnake[i].PosVertical);
+                                Console.Write(newSnake[i].SnakePart);
+                                moveVerticalForNextSegment = tempVertical;
+                                moveHorizontalForNextSegment = tempHorizontal;
+                            }
+                            score++;
                         }
+                        Console.SetCursorPosition(tempHorizontal, tempVertical);
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write(0);
+
 
                     }
+
+
+
+                }
+                if(newSnake[0].PosHorizontal <= 0 || newSnake[0].PosHorizontal >= acrossMaxCoordinate || newSnake[0].PosVertical <= 0 || newSnake[0].PosVertical >= upMaxCoordinate)
+                {
+                    if (gameOver == true)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Game Over");
+                        Console.WriteLine($"score: {score}");
+                        Thread.Sleep(1000);
+                        break;
+                    }
+                
                     
                 }
 
 
-
-
-
-                
-            } while (gameLength < 25);
+            } while (gameLength == true);
 
 
 
@@ -466,7 +548,7 @@ namespace Grid_Design
             //    yPoint++;
 
 
-            //}
+
         }
 
     }
