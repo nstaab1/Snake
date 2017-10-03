@@ -123,11 +123,13 @@ namespace Grid_Design
                 int tempHorizontal = 0;
                 int moveVerticalForNextSegment = 0;
                 int moveHorizontalForNextSegment = 0;
-                
+                ConsoleKeyInfo info = Console.ReadKey(true);
+
                 while (Console.KeyAvailable == false)
                 {
-                                                          
-                    if(newSnake[0].PosHorizontal <= 0 || newSnake[0].PosHorizontal >= acrossMaxCoordinate || newSnake[0].PosVertical <= 0 || newSnake[0].PosVertical >= upMaxCoordinate)
+
+
+                    if (newSnake[0].PosHorizontal <= 0 || newSnake[0].PosHorizontal >= acrossMaxCoordinate || newSnake[0].PosVertical <= 0 || newSnake[0].PosVertical >= upMaxCoordinate)
                     {
                         Console.Clear();
                         Console.WriteLine("Game Over");
@@ -166,6 +168,20 @@ namespace Grid_Design
                             moveHorizontalForNextSegment = newSnake[0].PosHorizontal;
                             Console.Write(0);
                             newSnake[0].PosHorizontal = moveLeft;
+                            
+                            //Check to see if snake is touching itself.
+                            for (int i = 1; i < newSnake.Count; i++)
+                            {
+                                if( newSnake[0].PosHorizontal == newSnake[i].PosHorizontal && newSnake[0].PosVertical == newSnake[i].PosVertical)
+                                {
+                                    Console.Clear();
+                                    Console.WriteLine("Game Over");
+                                    Console.WriteLine($"score: {score}");
+                                    gameOver = true;
+                                    return;
+                                }
+                            }
+
                             Console.SetCursorPosition(newSnake[0].PosHorizontal, newSnake[0].PosVertical);
                             Console.Write(newSnake[0].SnakePart);
                             
@@ -221,6 +237,19 @@ namespace Grid_Design
                             moveHorizontalForNextSegment = newSnake[0].PosHorizontal;
                             Console.Write(0);
                             newSnake[0].PosVertical = moveUp;
+                            //Check to see if snake is touching itself.
+                            for (int i = 1; i < newSnake.Count; i++)
+                            {
+                                if (newSnake[0].PosHorizontal == newSnake[i].PosHorizontal && newSnake[0].PosVertical == newSnake[i].PosVertical)
+                                {
+                                    Console.Clear();
+                                    Console.WriteLine("Game Over");
+                                    Console.WriteLine($"score: {score}");
+                                    gameOver = true;
+                                    return;
+                                }
+                            }
+
                             Console.SetCursorPosition(newSnake[0].PosHorizontal, newSnake[0].PosVertical);
                             Console.Write(newSnake[0].SnakePart);                                                 
 
@@ -275,6 +304,19 @@ namespace Grid_Design
                             moveHorizontalForNextSegment = newSnake[0].PosHorizontal;
                             Console.Write(0);
                             newSnake[0].PosHorizontal = moveRight;
+                            
+                            //Check to see if snake is touching itself.
+                            for (int i = 1; i < newSnake.Count; i++)
+                            {
+                                if (newSnake[0].PosHorizontal == newSnake[i].PosHorizontal && newSnake[0].PosVertical == newSnake[i].PosVertical)
+                                {
+                                    Console.Clear();
+                                    Console.WriteLine("Game Over");
+                                    Console.WriteLine($"score: {score}");
+                                    gameOver = true;
+                                    return;
+                                }
+                            }
                             Console.SetCursorPosition(newSnake[0].PosHorizontal, newSnake[0].PosVertical);
                             Console.Write(newSnake[0].SnakePart);
                                                         
@@ -329,6 +371,19 @@ namespace Grid_Design
                             moveHorizontalForNextSegment = newSnake[0].PosHorizontal;
                             Console.Write(0);
                             newSnake[0].PosVertical = moveDown;
+                            
+                            //Check to see if snake is touching itself.
+                            for (int i = 1; i < newSnake.Count; i++)
+                            {
+                                if (newSnake[0].PosHorizontal == newSnake[i].PosHorizontal && newSnake[0].PosVertical == newSnake[i].PosVertical)
+                                {
+                                    Console.Clear();
+                                    Console.WriteLine("Game Over");
+                                    Console.WriteLine($"score: {score}");
+                                    gameOver = true;
+                                    return;
+                                }
+                            }
                             Console.SetCursorPosition(newSnake[0].PosHorizontal, newSnake[0].PosVertical);
                             Console.Write(newSnake[0].SnakePart);
                                                         
